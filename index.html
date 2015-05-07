@@ -10,7 +10,7 @@
 <script type='text/javascript'>
 
   var isDrawing = false;
-	var scamper = new Scamper();
+	var scamper = new Scamper({step: 10, sample: 2});
 
 	scamper.setHandlePointFunction(function(pt) {
     var d = document.createElement("div");
