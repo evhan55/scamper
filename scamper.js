@@ -96,8 +96,8 @@ var Scamper = function(opts) {
   // Args
   if(!opts) {
     opts = {
-      step: 5;
-      sample: 1;
+      step: 5,
+      sample: 1
     };
   }
 
