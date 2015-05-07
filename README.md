@@ -2,6 +2,8 @@
 
 Scamper takes raw input points and maps them to evenly spaced points along a cubic Bezier curve.
 
+![](http://i.imgur.com/sLuATqS.png)
+
 ### API
 
 <table>
