@@ -23,6 +23,12 @@ var Scamper = function(opts) {
   // PUBLIC
   //////////////////////////////////////////////
 
+  // ------------------------------------------
+  // newStroke
+  //
+  // Start a new stroke and reset curve and
+  // step calculation variables.
+  //
   this.newStroke = function() {
   	curRawStroke = [];
   	curRawSampledStroke = [];
@@ -32,6 +38,13 @@ var Scamper = function(opts) {
   	lastControlPoint = null;
   }
 
+  // ------------------------------------------
+  // addPoint
+  //
+  // Add a point to the current stroke and
+  // create a Bezier if enough filtered points
+  // exist.
+  //
   this.addPoint = function(x, y, p) {
   	pointCounter++;
     
@@ -86,6 +99,12 @@ var Scamper = function(opts) {
 
   }
 
+  // ------------------------------------------
+  // setPointHandler
+  //
+  // Sets function to handle points as they
+  // are created.
+  //
   this.setPointHandler = function(fn) {
     handlePointFunction = fn;
   }
@@ -118,8 +137,10 @@ var Scamper = function(opts) {
   // ------------------------------------------
   // createBezier
   //
-  // Draw a look-ahead cubic bezier based on 3
-  // input points.
+  // Create a look-ahead cubic bezier based on
+  // 3 input points and call point handler
+  // function on evenly spaced step points
+  // along that curve.
   //
   function createBezier(pt0, pt1, pt2) {
     // Endpoints and control points
