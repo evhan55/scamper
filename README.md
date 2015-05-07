@@ -20,7 +20,7 @@ Even points along a cubic Bezier curve
   <td>Adds raw input point to current stroke.</td>
 </tr>
 <tr>
-  <td><code>setHandlePointFunction(function)</code></td>
+  <td><code>setPointHandler(function)</code></td>
   <td>Function to be run on new even step points.</td>
 </tr>
 </table>
@@ -31,7 +31,7 @@ Even points along a cubic Bezier curve
 var isDrawing = false;
 var scamper = new Scamper({step: 10, sample: 2});
 
-scamper.setHandlePointFunction(function(pt) {
+scamper.setPointHandler(function(pt) {
 	var d = document.createElement("div");
 	d.innerHTML = 's';
 	d.setAttribute('style', 'position: absolute; top: ' + pt.y + 'px; left: ' + pt.x + 'px;');

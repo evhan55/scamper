@@ -86,7 +86,7 @@ var Scamper = function(opts) {
 
   }
 
-  this.setHandlePointFunction = function(fn) {
+  this.setPointHandler = function(fn) {
     handlePointFunction = fn;
   }
 
