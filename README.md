@@ -9,14 +9,11 @@ Scamper takes raw input points and maps them to evenly spaced points along a cub
 <table>
 <tr>
   <td width="30%"><code>Scamper(opts)</code></td>
-  <td width="70%">Creates a new Scamper instance.  Optional parameters: <br> <b>sample</b>: point subsampling rate <br> <b>step</b>: desired distance between points</td>
+  <td width="70%">Creates a new Scamper instance.  Optional parameters: <br><br> <b>sample</b>: point subsampling rate <br> <b>step</b>: desired distance between points <br><br></td>
 </tr>
-</table>
-
-<table>
 <tr>
-  <td width="30%"><code>newStroke()</code></td>
-  <td width="70%">Begins a new stroke.</td>
+  <td><code>newStroke()</code></td>
+  <td>Begins a new stroke.</td>
 </tr>
 <tr>
   <td><code>addPoint(x, y, p)</code></td>
