@@ -30,12 +30,12 @@ var Scamper = function(opts) {
   // step calculation variables.
   //
   this.newStroke = function() {
-  	curRawStroke = [];
-  	curRawSampledStroke = [];
-  	curFilteredStroke = [];
+    curRawStroke = [];
+    curRawSampledStroke = [];
+    curFilteredStroke = [];
 
-  	stepOffset = 0.0;
-  	lastControlPoint = null;
+    stepOffset = 0.0;
+    lastControlPoint = null;
   }
 
   // ------------------------------------------
@@ -46,8 +46,8 @@ var Scamper = function(opts) {
   // exist.
   //
   this.addPoint = function(x, y, p) {
-  	pointCounter++;
-    
+    pointCounter++;
+
     var point = new Point(x,y,p);
 
     //
