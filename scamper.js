@@ -6,8 +6,6 @@ Evelyn Eastmond
 Viewpoints Research Institute
 
 (c) 2014-2015
-
-TODO: License
 */
 
 "use strict"; // for strict mode
