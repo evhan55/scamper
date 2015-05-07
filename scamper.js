@@ -189,10 +189,10 @@ var Scamper = function(opts) {
     // Set last control point
     lastControlPoint = p2;
 
-    // Step along curve and draw step
+    // Calculate even steps along curve
     var stepPoints = calculateStepPoints(p0, p1, p2, p3);
 
-    // Call function on points
+    // Call function on new evenly spaced points
     for(var i = 0; i < stepPoints.length; i++) {
       handlePointFunction.call(this, stepPoints[i]);
     }
