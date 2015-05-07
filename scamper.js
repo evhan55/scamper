@@ -2,6 +2,7 @@
 Scamper - Even points along a cubic Bezier curve
 
 Dan Amelang
+Evelyn Eastmond
 Viewpoints Research Institute
 
 (c) 2014-2015
