@@ -21,7 +21,7 @@ Scamper takes raw input points and maps them to evenly spaced points along a cub
 </tr>
 <tr>
   <td><code>setPointHandler(function)</code></td>
-  <td>Function to be run on new even step points.</td>
+  <td>Function to be run on new even step points.  Function parameter is a point object with <b>x</b>, <b>y</b>, <b>p (pressure)</b> values.</td>
 </tr>
 </table>
 
