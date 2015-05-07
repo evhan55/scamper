@@ -1,5 +1,6 @@
 # Scamper
-Even points along a cubic Bezier curve
+
+Scamper takes raw input points and maps them to evenly spaced points along a cubic Bezier curve.
 
 ### API
 
