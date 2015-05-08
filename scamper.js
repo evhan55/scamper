@@ -206,13 +206,12 @@ var Scamper = function(opts) {
   var stepInterval = opts.step ? opts.step : 5;
   var pointCounter = 0;
   var sample = opts.sample ? opts.sample : 1;
-  var handlePointFunction = null;
 
   // ------------------------------------------
   // createBezier
   //
   // Create a look-ahead cubic bezier based on
-  // 3 input points and call point handler
+  // 3 input points and call point ha ndler
   // function on evenly spaced step points
   // along that curve.
   //
