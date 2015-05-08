@@ -21,22 +21,32 @@ var Scamper = function(opts) {
   // PUBLIC
   //////////////////////////////////////////////
 
-  this.beginStroke = function(x, y, p) {
+  // ------------------------------------------
+  // newStroke
+  //
+  // Start a new stroke and reset curve and
+  // step calculation variables.
+  //
+  this.newStroke = function() {
     curRawStroke = [];
     curRawSampledStroke = [];
     curFilteredStroke = [];
 
     stepOffset = stepInterval;
     lastControlPoint = null;
-
-    this.extendStroke(x, y, p);
   }
 
-  this.extendStroke = function(x, y, p) {
-    var stepPoints = [];
-    var point = new Point(x,y,p);
-
+  // ------------------------------------------
+  // addPoint
+  //
+  // Add a point to the current stroke and
+  // create a Bezier if enough filtered points
+  // exist.
+  //
+  this.addPoint = function(x, y, p) {
     pointCounter++;
+
+    var point = new Point(x,y,p);
 
     //
     // Raw
@@ -76,7 +86,7 @@ var Scamper = function(opts) {
       // 3 points needed for a look-ahead bezier
       var len = curFilteredStroke.length;
       if(len >= 3) {
-        stepPoints = createBezier(
+        createBezier(
           curFilteredStroke[len - 3],
           curFilteredStroke[len - 2],
           curFilteredStroke[len - 1]
@@ -85,102 +95,16 @@ var Scamper = function(opts) {
 
     }
 
-    return stepPoints;
-
   }
 
-  this.endStroke = function(x, y, p) {
-    // make sure we create step points until the end
-    var stepPoints = [];
-    var point = new Point(x,y,p);
-
-    //
-    // Raw
-    //
-    curRawStroke.push(point);
-
-    //
-    // Sampled and filtered
-    //
-
-    // Push sampled point
-    curRawSampledStroke.push(point);
-
-    // Filter next-to-last input point
-    var len = curRawSampledStroke.length;
-    if(len >= 3) {
-      console.log('curRawSampleStroke.length: ' + curRawSampledStroke.length);
-      var fpoint = calculateFilteredPoint(
-        curRawSampledStroke[len - 3],
-        curRawSampledStroke[len - 2],
-        curRawSampledStroke[len - 1]
-      );
-      curFilteredStroke.push(fpoint);
-    } else {
-      console.log(curRawSampledStroke.length);
-    }
-
-    // TODO:
-    // - Handle single point and double point strokes
-    // 3 points needed for a look-ahead bezier
-    var len = curFilteredStroke.length;
-    if(len >= 3) {
-      console.log('curFilteredStroke.length: ' + curFilteredStroke.length);
-      stepPoints = createBezier(
-        curFilteredStroke[len - 3],
-        curFilteredStroke[len - 2],
-        curFilteredStroke[len - 1]
-      );
-    } else {
-      console.log(curFilteredStroke.length);
-    }
-
-    
-    //
-    // Raw
-    //
-    curRawStroke.push(point);
-
-    //
-    // Sampled and filtered
-    //
-
-    // Push sampled point
-    curRawSampledStroke.push(point);
-
-    // Filter next-to-last input point
-    var len = curRawSampledStroke.length;
-    if(len >= 3) {
-      console.log('curRawSampleStroke.length: ' + curRawSampledStroke.length);
-      var fpoint = calculateFilteredPoint(
-        curRawSampledStroke[len - 3],
-        curRawSampledStroke[len - 2],
-        curRawSampledStroke[len - 1]
-      );
-      curFilteredStroke.push(fpoint);
-    } else {
-      console.log(curRawSampledStroke.length);
-    }
-
-    // TODO:
-    // - Handle single point and double point strokes
-    // 3 points needed for a look-ahead bezier
-    var len = curFilteredStroke.length;
-    if(len >= 3) {
-      console.log('curFilteredStroke.length: ' + curFilteredStroke.length);
-      var pts = createBezier(
-        curFilteredStroke[len - 3],
-        curFilteredStroke[len - 2],
-        curFilteredStroke[len - 1]
-      );
-      for(var i = 0; i < pts.length; i++) {
-        stepPoints.push(pts[i]);
-      }
-    } else {
-      console.log(curFilteredStroke.length);
-    }
-
-    return stepPoints;
+  // ------------------------------------------
+  // setPointHandler
+  //
+  // Sets function to handle points as they
+  // are created.
+  //
+  this.setPointHandler = function(fn) {
+    handlePointFunction = fn;
   }
 
   //////////////////////////////////////////////
@@ -266,8 +190,11 @@ var Scamper = function(opts) {
     // Calculate even steps along curve
     var stepPoints = calculateStepPoints(p0, p1, p2, p3);
 
-    // Return points
-    return stepPoints;
+    // Call function on new evenly spaced points
+    for(var i = 0; i < stepPoints.length; i++) {
+      handlePointFunction.call(this, stepPoints[i]);
+    }
+
   }
 
   // ------------------------------------------
