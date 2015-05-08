@@ -16,23 +16,22 @@
     isDrawing = true;
     scamper.beginStroke(e.clientX, e.clientY, 0);
   }
+
   window.onmousemove = function(e) {
     if (!isDrawing) return;
-    scamper.extendStroke(e.clientX, e.clientY, 0).forEach(function(pt) {
-      var d = document.createElement('div');
-      d.innerHTML = '&#149;';
-      d.setAttribute('style', 'position: absolute; top: ' + pt.y + 'px; left: ' + pt.x + 'px;');
-      document.body.appendChild(d);
-    });
+    scamper.extendStroke(e.clientX, e.clientY, 0).forEach(drawPoint);
   }
+  
   window.onmouseup = function(e) {
     isDrawing = false;
-    scamper.endStroke(e.clientX, e.clientY, 0).forEach(function(pt) {
-      var d = document.createElement('div');
-      d.innerHTML = '&#149;';
-      d.setAttribute('style', 'position: absolute; top: ' + pt.y + 'px; left: ' + pt.x + 'px;');
-      document.body.appendChild(d);
-    });
+    scamper.endStroke(e.clientX, e.clientY, 0).forEach(drawPoint);
+  }
+
+  function drawPoint(pt) {
+    var d = document.createElement('div');
+    d.innerHTML = '&#149;';
+    d.setAttribute('style', 'position: absolute; top: ' + pt.y + 'px; left: ' + pt.x + 'px;');
+    document.body.appendChild(d);
   }
 
 </script>
