@@ -381,18 +381,6 @@ var Scamper = function(opts) {
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  Point.prototype.asArray = function() {
-    return [this.x, this.y, this.p];
-  }
-
-  Point.prototype.asObj = function() {
-    return {
-      x: this.x,
-      y: this.y,
-      p: this.p
-    };
-  }
-
   // ------------------------------------------
   // UTILS
   //
